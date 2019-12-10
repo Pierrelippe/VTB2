@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+
+
+    <div class="container">
+        <div class="card mx-auto col-8 mt-4 mb-4 border-primary">
+            <h1 class="mx-auto card-header mt-2 mb-5 border-bottom border-primary rounded">Profil</h1>
+            <img class="avatarImg mx-auto" src='/image/photo/{{ User.profilPhoto.link }}'>
+
+            <div class="mx-auto my-5">
+                <div class="d-block">
+                    <label class="d-inline">Name :</label>
+                    <p class="d-inline"> {{ User.name }}  </p>
+                    <label class="ml-5">Lastname :</label>
+                    <p class="d-inline">{{ User.lastname }}</p>
+                </div>
+                <div class="d-block mt-3">
+                    <label class="d-inline-block">Username :</label>
+                    <p class="d-inline">{{ User.username }}</p>
+                </div>
+                <div class="d-block mt-3">
+                    <label class="d-inline">Email :</label>
+                    <p class="d-inline"> {{ User.email }}</p>
+                </div>
+                <div class="d-block mt-3">
+                    <label class="d-inline">Tel :</label>
+                    <p class="d-inline">{{ User.phone }}</p>
+                </div>
+            </div>
+
+            {% if app.user and IsMyProfile%}
+                <div class="d-inline mx-auto  mb-4">
+                    <a class="btn btn-outline-primary d-inline m-2" href={{ path( "profil_update") }}> Modifier Informations </a>
+                    <a class="btn btn-outline-primary d-inline m-2" href={{ path( "profil_update_password") }}> Modifier Mot de Passe</a>
+                    <a class="btn btn-outline-primary d-inline m-2" href={{ path( "profil_update_photo") }}> Modifier Photo</a>
+                </div>
+            {% endif %}
+
+
+        </div>
+    </div>
+{% endblock %}

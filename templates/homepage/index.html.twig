@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}VendTonBordel{% endblock %}
+
+{% block stylesheets %} {{ parent() }} <link rel="stylesheet" href="{{ asset('/css/Index.css') }}">{% endblock %}
+{% block navbar %}{% endblock %}
+{% block body %}
+{% block background %} {% endblock %}
+    <div class="background_1 "></div>
+    <div class="background_2 "></div>
+    <div class="background_3 "></div>
+
+
+    <div class="texts">
+        <img src="/image/Logo.png" class="logo">
+        <h1 id="VTB">VendTonBordel</h1>
+        <div class="inscriptions_texts_block">
+
+            <form action="{{ path('homepage') }}" method="post" class="">
+                <label for="username" class="d-block"><b>Username</b></label>
+                <input class="px-2"  placeholder="Username" required name="_username" type="text"><br>
+                <label for="password"class="d-block mt-3"><b>Password</b></label>
+                <input class="px-2" placeholder="Mot de passe" required name="_password" type="password"><br>
+
+                <button type="submit" class="mt-2 btn btn-primary ml-5"> Connexion </button>
+
+                <a class="d-block mt-2" href={{ path("security_registration") }}>Tu n'as pas de compte ? </a>
+            </form>
+
+        </div>
+
+    </div>
+{% endblock %}

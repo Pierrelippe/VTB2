@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonces{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="background_2  "></div>
+        <div class="background_1"></div>
+        <div class="background_21  "></div>
+        <div class="background_12"></div>
+
+        <!-- SEARCH -->
+<div class="mt-5 ">
+        <form method="post" class=" mx-auto p-2">
+            <select name="category" class="mb-2">
+                <option value="" disabled selected>Choisissez une catégorie</option>
+                {% for category in listecategories %}
+                    <option value="{{ category.name }}"> {{ category.name }}</option>
+                {% endfor %}
+            </select>
+
+
+            <input type="search" class="form-control col-3" name="adSearch" placeholder="Rechercher...">
+            <a href="{{ path('annonces') }}"><button type="submit" name="submit" class="btn btn-primary mt-2">Rechercher</button></a>
+        </form>
+</div>
+
+
+        <!-- ANNONCES -->
+
+        <h1 class="mx-auto card-header mt-2 mb-5 border-bottom border-primary rounded text-center">Annonces</h1>
+        <h4 style="text-align: center">Il y a {{ compteur }} annonce(s) disponible(s)</h4>
+        {%for a in annonces |sort((a, b) => a.date <=> b.date) | reverse%}
+            <div class="card mx-auto col-8 mt-4 my-4 border-primary">
+                <div class="d-inline mt-3">
+                    <a href="/profil/{{ a.user.id }}"><img class="avatarImg d-inline" src='/image/photo/{{ a.user.profilPhoto.link }}'></a>
+                    <p class="d-inline mx-2" style="font-size: 25px;" >{{ a.user.username }}</p>
+                    <p class="d-inline" style="color: #656565; font-size: 13px;">{{ a.date|date('d/m/Y H:i:s') }}</p>
+                </div>
+                <div class="mx-auto mb-3">
+                    <a style=" text-decoration:none;" href="/annonces/{{ a.id }}"><h3 class="d-inline mx-4 px-4" style="color: #006cc5" >{{ a.name }}</h3></a>
+                </div>
+                <div class="mx-auto">
+                    <label class="d-inline">Description : </label>
+                    <p class="d-inline">{{ a.description}}</p>
+                </div >
+                <div class="mx-auto">
+                    <label class="d-inline">Prix : </label>
+                    <p class="d-inline">{{ a.prix}} €</p>
+                </div>
+                <div class="mx-auto mb-4">
+                    <label class="d-inline">Categorie : </label>
+                    <p class="d-inline">{{ a.categorie.name}}</p>
+                </div>
+                {% if a.photo != null  %}
+                    {% for p in a.photo %}
+                <div class="mx-auto mb-4">
+                    <img class="d-inline AnnonceImg"  src='/image/photo/{{ p.link }}'>
+                    {% if app.user %}
+                        {% if auth.id== a.user.id %}
+                            <a class="btn btn-outline-lights py-2 d-inline" href="/annonces/removePhoto/{{ p.id }}">Supprimer</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                    {% endfor %}
+                {% endif %}
+                <!-- Photos -->
+                {% if app.user %}
+                    {% if auth.id== a.user.id %}
+                        <div class="mx-auto d-inline my-3">
+                            <a class="btn btn-outline-primary py-2 d-inline" href="/annonces/edit/{{ a.id }}">Modifier</a>
+                            <a class="btn btn-outline-primary mx-3 py-2 d-inline" href="/annonces/editPhoto/{{ a.id }}">Ajouter Photo</a>
+                            <a href="/annonces/delete/{{ a.id }}" class="btn btn-outline-primary ">Supprimer</a>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+
+        {% endfor %}
+
+
+
+        {% if app.user %}
+            <div class="mx-auto "style="text-align: center">
+            <button type="button" class="btn btn-outline-primary my-3"  data-toggle="modal" data-target="#newAnnonceModal">Ajouter</button>
+            </div>
+
+                <!-- Modal Ajouter une annonce -->
+                <div class="modal fade" id="newAnnonceModal" tabindex="-1" role="dialog" aria-labelledby="newAnnonceModalTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="newAnnonceModalTitle">Nouvelle Annonce</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                {{ form(form) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            {% endif %}
+    </div>
+
+{% endblock %}

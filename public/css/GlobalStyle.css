@@ -1,0 +1,93 @@
+p,h1,li,a{
+    font-family: 'Alatsi', sans-serif;
+}
+label{
+    color: #656565;
+}
+a{
+    text-decoration:none;
+}
+li{
+    list-style-type: none;
+}
+/* Css d'avatar*/
+.avatarImg
+{
+    object-fit: contain;
+    border-radius:50%;
+    width: 80px;
+    heigth: 80px;
+
+}
+
+/* Css photos Annonces*/
+.AnnonceImg
+{
+    object-fit: contain;
+    border-radius:5%;
+    width: 500px;
+    heigth: 500px;
+
+}
+/* Css de la navbar */
+.navbar-style{
+    background-color: #98d5f2;
+    color: white;
+}
+
+
+/*  Background  */
+.background_1{
+
+    background-color: rgba(8, 65, 92, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -5;
+    clip-path: polygon(100% 0, 90% 100%, 100% 100%);
+
+
+}
+.background_2{
+    background-color: rgba(40, 152, 204, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    clip-path: polygon(95% 0, 100% 0, 100% 100%, 90% 100%);
+
+}
+.background_12{
+    background-color: rgba(8, 65, 92, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -5;
+    clip-path: polygon(0 0, 10% 0, 2% 100%, 0 100%);
+    background-attachment: fixed;
+
+}
+
+.background_21{
+    background-color: rgba(40, 152, 204, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    clip-path: polygon(0 0, 10% 0, 8% 100%, 0 100%);
+
+
+}
+
+
+
+
+
